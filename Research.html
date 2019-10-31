@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tong Wu - Postdoctoral Fellow at Tulane University</title>
+    <meta name="description" content="Tong Wu - Postdoctoral Fellow at
+      Tulane University">
+    <meta name="keywords" content="tong, wu, numerical, tulane, ncsu,
+      kurganov, alina, hyman">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="style/style.css"
+      title="style">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu"
+      rel="stylesheet">
+    <link rel="stylesheet" href="css/academicons.min.css">
+    <link rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous">
+    <style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+overflow: hidden;
+border: 1px solid #ccc;
+background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+background-color: inherit;
+float: left;
+border: none;
+outline: none;
+cursor: pointer;
+padding: 14px 16px;
+transition: 0.3s;
+font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+display: none;
+padding: 6px 12px;
+-webkit-animation: fadeEffect 1s;
+animation: fadeEffect 1s;
+}
+
+/* Fade in tabs */
+@-webkit-keyframes fadeEffect {
+from {opacity: 0;}
+to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+from {opacity: 0;}
+to {opacity: 1;}
+}
+</style>
+    <style>
+img {
+  float: right;
+}
+</style>
+  </head>
+  <body>
+    <div id="main">
+      <div id="header">
+        <div id="logo">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><br>
+          </h1>
+          <h1><font size="+5" color="#000000">Tong Wu</font></h1>
+        </div>
+        <div id="menubar">
+          <ul id="menu">
+            <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+            <li><a href="index.html">Home</a></li>
+            <li class="selected"><a href="Research.html">Research</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <!--<li class="selected"><a href="Presentations.html">Presentations</a></li>-->
+            <li><a href="teaching.html">Teaching</a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="site_content2">
+        <div id="contentf">
+          <div class="tab"> <button class="tablinks"
+              onclick="openTab(event, 'DA')" id="defaultOpen">Data
+              Assimilation</button> <button class="tablinks"
+              onclick="openTab(event, 'AMM')">Adaptive Moving Mesh</button>
+            <button class="tablinks" onclick="openTab(event, 'SW')">Shallow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Water
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              Equations</button><button class="tablinks"
+              onclick="openTab(event, 'Net')">Network Generation </button></div>
+          <div id="DA" class="tabcontent">
+            <h1><font size="3">I have been working on developing
+                continuous data assimilation algorithms. In particular,
+                by extending the existing Azouani-Olsan-Titi (AOT)
+                algorithm by introducing dynamic feedback control, we
+                can control the convergence rate, which can help us to
+                estimate the amount of data we need in time to
+                successfully recover the initial conditions for a
+                numerical forecast model.</font></h1>
+            <br>
+            <p><img src="pics/test2.gif"
+                style="width:65%;margin-right:15px;"></p>
+            <h1><font size="3">Two dimensional shallow water model:</font>
+              <font size="2" color="#000000"> The following figure shows
+                solution profile during time period from 0 to 3. The
+                approximating solutions(lower row; h: water depth; p:
+                momentum in x-direction) start from constant and recover
+                most part of reference solutions (uper row) using the
+                observed data (red dots) as t increases, including the
+                shocks and even some small scale details.</font></h1>
+          </div>
+          <div id="AMM" class="tabcontent">
+            <h1><font size="3">One major difficulty in developing
+                numerical methods for hyperbolic system is that the
+                hyperbolic system admits non-smooth solutions. To
+                achieve high resolution as well as to improve the
+                efficiency of the numerical methods, we have developed
+                new AMM central-upwind schemes for the hyperbolic
+                system.</font></h1>
+            <br>
+            <p><img src="pics/AMMsw2.png"
+                style="width:50%;margin-right:15px;"
+                onclick="onClick(this)"> </p>
+            <h1><font size="3">Two dimensional shallow water model:</font>
+              <font size="2" color="#000000"> We presented adaptive
+                moving mesh central-upwind schemes for Saint-Venant
+                system of shallow water, which is well-balanced and
+                positivity preserving. As one can see in the right
+                figure, the discontinuities in the solution are clearly
+                captured by the moving mesh.</font></h1>
+            <p><img src="pics/AMMchm3.png"
+                style="width:60%;margin-right:15px;float: left;"
+                onclick="onClick(this)"> </p>
+            <div id="modal01" class="w3-modal"
+              onclick="this.style.display='none'"> <span
+                class="w3-button w3-hover-red w3-xlarge
+                w3-display-topright">×</span>
+              <div class="w3-modal-content w3-animate-zoom"> <img
+                  id="img01" style="width:100%"> </div>
+            </div>
+            <h1><br>
+              <br>
+              <br>
+              <br>
+              <font size="3">Two-species chemotaxis system:</font> <font
+                size="2" color="#000000"> We also presented a 2-D
+                adaptive moving mesh upwind scheme for the two-species
+                Patlak-Keller-Segel type chemotaxis system, in which the
+                two species do not compete, but have different
+                chemotactic sensitivity, which may lead to a
+                significantly different density growth rate. As one can
+                see in the left figure, the solution develops
+                complicated multi-spiky structures, which are captured
+                by the our AMM upwind scheme with a high resolution. </font></h1>
+            <br>
+          </div>
+          <div id="SW" class="tabcontent">
+            <h1><font size="3">Shallow water models are widely used as a
+                mathematical framework to study water flows in rivers
+                and coastal areas as well as to investigate a variety of
+                phenomena in atmospheric sciences and oceanography.
+                Solving the shallow water equations numerically is a
+                challenging task due to several reasons, such as
+                preservation of physically relevant steady state
+                solutions and the positivity preservation of water
+                depth. </font></h1>
+            <br>
+            <h1><font size="3">Shallow Water Equations with Friction:</font>
+              <font size="2" color="#000000">Besides the numerical
+                difficulties mentioned above, the bottom friction term
+                will become a very stiff damping term when the water
+                depth is very small. We have introduced a
+                semi-implicit-explicit version of the central-upwind
+                scheme, which has the second-order accuracy and is
+                well-balanced and positivity preserving. Since the stiff
+                friction term is treated semi-implicitly, no extra time
+                restriction is needed.<br>
+                <div align="center"><img src="pics/path476.png"
+                    style="width:35%;margin-right:15px;float: none;"
+                    align="middle"> <img src="pics/sw1.gif"
+                    style="width:30%;margin-right:15px;float: none;"
+                    align="middle"><br>
+                </div>
+                We tested the designed method on a number of examples
+                and also achieve a remarkable agreement with
+                experimental results. In this simulation, we consider
+                the setting corresponds to the laboratory experiment
+                reported in [L. Cea, M. Garrido, and J. Puertas, J.
+                Hydrol., (2010)], which was built to mimic the rainfall
+                in an urban area.</font></h1>
+            <font size="2" color="#000000"> </font></div>
+          <font size="2" color="#000000">
+            <div id="Net" class="tabcontent">
+              <p><img src="pics/net1.png" style="width:50%;float:left;">
+              </p>
+              <h1><font size="3">Many natural, social system and
+                  dynamics can be described by using networks. In
+                  particular, it can be used to understand the
+                  transmission of infectious diseases, where each node
+                  is an individual, and each edge between two nodes
+                  represents a possible transmission routes between
+                  them. For some diseases, its transmission mechanism
+                  requires the introduction of a bipartite network,
+                  where the nodes (individuals) are divided into two
+                  mutually exclusive sets, and the edges (transmission)
+                  can only appear between individuals of different
+                  classes. For example, sexually transmitted diseases,
+                  such as Chlamydia, which only transmitted through
+                  heterosexual partnership. When generating the
+                  bipartite network, it is very important to keep the
+                  relevant structure of the corresponding real-world
+                  networks, including the network degree distribution
+                  and joint-degree distribution. For example, in
+                  Chlamydia epidemic, the number of partners one has is
+                  correlated with the number of partners that his/her
+                  partner has. In most cases, people might select
+                  partners who have a similar number of partners. In
+                  other cases, there might exist people with many
+                  partners whose partners have only few partners, such
+                  as sex workers. To accurately capture the real-world
+                  property and avoid the artificial influence caused by
+                  the structure of a particular network, we designed a
+                  class of new algorithms in \cite{ajwhnet} to construct
+                  bipartite networks that exactly match both given
+                  degree distribution and joint-degree distribution. We
+                  illustrate the effectiveness of the proposed
+                  algorithms by recovering a romance network, which is
+                  generated using the NetworkX software environment, and
+                  compare several essential properties of the target
+                  network. We observe that when average degree of nodes
+                  is low, as is the case for romance and heterosexual
+                  partnership networks, our bipartite networks tend to
+                  preserve additional properties, such as the cluster
+                  coefficients, when comparing with other algorithms
+                  that do not preserve the joint-degree distribution of
+                  the original network. </font></h1>
+            </div>
+            <br>
+          </font></div>
+        <font size="2" color="#000000"> </font></div>
+      <font size="2" color="#000000">
+        <div id="footer"> Copyright © Tong Wu | <a
+            href="http://www.html5webtemplates.co.uk">design from
+            HTML5webtemplates.co.uk</a> </div>
+      </font></div>
+    <script>
+function openTab(evt, tabName) {
+// Declare all variables
+var i, tabcontent, tablinks;
+
+// Get all elements with class="tabcontent" and hide them
+tabcontent = document.getElementsByClassName("tabcontent");
+for (i = 0; i < tabcontent.length; i++) {
+tabcontent[i].style.display = "none";
+}
+
+// Get all elements with class="tablinks" and remove the class "active"
+tablinks = document.getElementsByClassName("tablinks");
+for (i = 0; i < tablinks.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" active", "");
+}
+
+// Show the current tab, and add an "active" class to the button that opened the tab
+document.getElementById(tabName).style.display = "block";
+evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+    <script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() { 
+  modal.style.display = "none";
+}
+</script>
+    <script>
+function onClick(element) {
+document.getElementById("img01").src = element.src;
+document.getElementById("modal01").style.display = "block";
+}
+</script>
+  </body>
+</html>
