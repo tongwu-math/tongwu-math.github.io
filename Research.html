@@ -249,6 +249,8 @@ Water
 
 
 
+
+
               Equations</button><button class="tablinks"
               onclick="openTab(event, 'Net')">Network Generation </button></div>
           <div id="DA" class="tabcontent">
@@ -362,41 +364,21 @@ Water
                   transmission of infectious diseases, where each node
                   is an individual, and each edge between two nodes
                   represents a possible transmission routes between
-                  them. For some diseases, its transmission mechanism
-                  requires the introduction of a bipartite network,
-                  where the nodes (individuals) are divided into two
-                  mutually exclusive sets, and the edges (transmission)
-                  can only appear between individuals of different
-                  classes. For example, sexually transmitted diseases,
-                  such as Chlamydia, which only transmitted through
-                  heterosexual partnership. When generating the
-                  bipartite network, it is very important to keep the
-                  relevant structure of the corresponding real-world
-                  networks, including the network degree distribution
-                  and joint-degree distribution. For example, in
-                  Chlamydia epidemic, the number of partners one has is
-                  correlated with the number of partners that his/her
-                  partner has. In most cases, people might select
-                  partners who have a similar number of partners. In
-                  other cases, there might exist people with many
-                  partners whose partners have only few partners, such
-                  as sex workers. To accurately capture the real-world
+                  them. For example, sexually transmitted diseases, such
+                  as Chlamydia, which only transmitted through
+                  heterosexual partnership. <br>
+                  When generating the bipartite network, it is very
+                  important to keep the relevant structure of the
+                  corresponding real-world networks, including the
+                  network degree distribution and joint-degree
+                  distribution. To accurately capture the real-world
                   property and avoid the artificial influence caused by
                   the structure of a particular network, we designed a
-                  class of new algorithms in \cite{ajwhnet} to construct
-                  bipartite networks that exactly match both given
-                  degree distribution and joint-degree distribution. We
-                  illustrate the effectiveness of the proposed
-                  algorithms by recovering a romance network, which is
-                  generated using the NetworkX software environment, and
-                  compare several essential properties of the target
-                  network. We observe that when average degree of nodes
-                  is low, as is the case for romance and heterosexual
-                  partnership networks, our bipartite networks tend to
-                  preserve additional properties, such as the cluster
-                  coefficients, when comparing with other algorithms
-                  that do not preserve the joint-degree distribution of
-                  the original network. </font></h1>
+                  new algorithm to construct bipartite networks that
+                  exactly match both given degree distribution and
+                  joint-degree distribution, and the resulting networks
+                  have been used to model transmissions of sexually
+                  transmitted diseases. </font></h1>
             </div>
             <br>
           </font></div>
