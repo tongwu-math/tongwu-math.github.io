@@ -397,6 +397,33 @@ nav {
 }
 
 .research-figures > div { flex: 1 1 320px; min-width: 0; }
+.research-figures .fig-narrow { flex: 0 1 620px; margin: 0 auto; }
+
+/* Equal-height boxes so side-by-side figures and their captions line up */
+.fig-box {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.12);
+  overflow: hidden;
+  margin-bottom: 0.35rem;
+}
+.fig-box img,
+.fig-box video {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: none;
+  border-radius: 0;
+}
+.fig-box .research-video { width: auto; }
 .research-figures .fig-half { flex: 1 1 45%; }
 .research-figures .fig-caption-wide { flex-basis: 100%; }
 
