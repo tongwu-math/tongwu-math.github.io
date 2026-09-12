@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Research — Tong Wu</title>
-  <meta name="description" content="Research overview of Tong Wu: data assimilation, adaptive moving mesh methods, shallow water equations, network-based epidemiology.">
+  <meta name="description" content="Research of Tong Wu: data assimilation for sparse observations, Wolbachia and mosquito-borne disease modeling, well-balanced schemes for shallow water and atmospheric flows, adaptive moving mesh methods.">
   <link rel="canonical" href="https://tongwu-math.github.io/research.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Research — Tong Wu">
-  <meta property="og:description" content="Research overview of Tong Wu: data assimilation, adaptive moving mesh methods, shallow water equations, network-based epidemiology.">
+  <meta property="og:description" content="Research of Tong Wu: data assimilation for sparse observations, Wolbachia and mosquito-borne disease modeling, well-balanced schemes for shallow water and atmospheric flows, adaptive moving mesh methods.">
   <meta property="og:url" content="https://tongwu-math.github.io/research.html">
   <meta property="og:image" content="https://tongwu-math.github.io/pics/wu-tong.jpg">
   <meta name="twitter:card" content="summary">
@@ -35,177 +35,314 @@
 
     <h1 class="page-title">Research</h1>
 
+    <p class="lead">
+      I develop numerical methods for nonlinear partial differential equations and apply
+      them to three kinds of problems: steering forecast models toward sparse observations,
+      planning releases of <em>Wolbachia</em>-infected mosquitoes to control dengue and
+      related diseases, and simulating water and air flows that stay close to physical balance.
+    </p>
+
+    <div class="area-cards">
+      <a class="area-card" href="#data-assimilation">
+        <span class="area-card-title">Data Assimilation</span>
+        <span class="area-card-desc">Locking a simulation onto reality from a handful of sensors.</span>
+      </a>
+      <a class="area-card" href="#mosquito-borne-disease">
+        <span class="area-card-title">Mosquito-Borne Disease Modeling</span>
+        <span class="area-card-desc">Where, when, and how many <em>Wolbachia</em> mosquitoes to release.</span>
+      </a>
+      <a class="area-card" href="#shallow-water">
+        <span class="area-card-title">Shallow Water and Atmospheric Flows</span>
+        <span class="area-card-desc">Schemes that keep physical balance exact, even over dry ground.</span>
+      </a>
+      <a class="area-card" href="#moving-mesh">
+        <span class="area-card-title">Adaptive Moving Mesh Methods</span>
+        <span class="area-card-desc">Grids that move themselves toward shocks and blow-up.</span>
+      </a>
+    </div>
+
     <!-- ── 1. Data Assimilation ── -->
-    <section class="research-area">
+    <section class="research-area" id="data-assimilation">
       <h2>1. Data Assimilation</h2>
 
       <p>
-        I have been working on developing continuous data assimilation algorithms.
-        By extending the existing Azouani–Olson–Titi (AOT) algorithm through the
-        introduction of dynamic feedback control, we can control the convergence
-        rate, which in turn helps estimate the amount of observational data needed
-        in time to successfully recover the initial conditions for a numerical
-        forecast model.
+        A weather or ocean forecast is a simulation that has to be told the current state of
+        the system, but sensors are sparse and most of that state is never measured.
+        Continuous data assimilation steers the running simulation toward whatever the
+        sensors do see, so that it gradually locks onto reality.
+      </p>
+
+      <p>
+        The classical Azouani–Olson–Titi (AOT) method nudges the simulation using the
+        mismatch at the observation points. My earlier work extended it with dynamic
+        feedback control, letting the nudging strength adapt as the error shrinks. This
+        gives an estimate of how much observational data, and for how long, is needed to
+        recover the initial state of a forecast model.
       </p>
 
       <div class="research-figures">
         <div>
-          <img src="pics/test2.gif"
-               alt="Data assimilation: 2D shallow water model recovery animation">
+          <video class="research-video" autoplay muted loop playsinline preload="metadata"
+                 poster="pics/da-shallow-water-poster.jpg"
+                 aria-label="Animation: data assimilation recovering a 2D shallow water solution from sparse observations">
+            <source src="pics/da-shallow-water.mp4" type="video/mp4">
+          </video>
           <p class="fig-caption">
-            2D shallow water model. Solution profiles over the time period [0, 3].
-            Approximating solutions (lower row: <em>h</em> = water depth,
-            <em>p</em> = x-momentum) start from a constant state and recover
-            most of the reference solutions (upper row) using sparse observed data
-            (red dots) as time increases, capturing shocks and fine-scale details.
+            Two-dimensional shallow water model over the time interval [0, 3]. The assimilated
+            solution (lower row: <em>h</em> = water depth, <em>p</em> = x-momentum) starts from a
+            constant state and recovers the reference solution (upper row) from sparse observations
+            (red dots), capturing shocks and fine-scale detail.
           </p>
         </div>
       </div>
 
       <p>
-        More recently, we have developed an Interpolated Discrepancy Data
-        Assimilation (IDDA) method for PDEs with sparse observations, which
-        improves on the standard AOT algorithm by constructing a smooth
-        interpolant of the discrepancy between the observed and simulated states
-        before applying feedback control.
-      </p>
-    </section>
-
-    <!-- ── 2. Adaptive Moving Mesh Methods ── -->
-    <section class="research-area">
-      <h2>2. Adaptive Moving Mesh Methods</h2>
-
-      <p>
-        One major difficulty in developing numerical methods for hyperbolic
-        systems is that these systems admit non-smooth solutions such as shocks
-        and contact discontinuities. To achieve high resolution while improving
-        computational efficiency, I have developed new adaptive moving mesh (AMM)
-        central-upwind schemes for hyperbolic systems.
+        More recently, with collaborators at Los Alamos National Laboratory and Tulane
+        University, I developed Interpolated Discrepancy Data Assimilation (IDDA). Instead
+        of adding the observed mismatch as an external push, IDDA interpolates the
+        discrepancy and feeds it through the nonlinear part of the equations. The error
+        bound in the resulting convergence theorem scales with the square of the
+        observation spacing, and in tests on turbulent two-dimensional flow with a few
+        hundred scattered sensors the method locks on where standard nudging drifts.
       </p>
 
       <div class="research-figures">
-        <div >
-          <img src="pics/AMMsw2.png"
-               alt="AMM central-upwind scheme for shallow water equations">
+        <div>
+          <img src="pics/idda-vorticity.jpg"
+               alt="Vorticity fields of 2D Navier-Stokes flow: reference, AOT reconstruction, and IDDA reconstruction at two times">
           <p class="fig-caption">
-            <strong>Shallow water equations.</strong> AMM central-upwind scheme for the
-            Saint-Venant system. The scheme is well-balanced and positivity
-            preserving; discontinuities in the solution are sharply captured by
-            the adaptive mesh.
+            Two-dimensional Navier–Stokes flow in vorticity form at <em>t</em> = 2 and
+            <em>t</em> = 6. Left: reference solution. Middle: AOT reconstruction. Right: IDDA
+            reconstruction, both from 400 scattered observations. IDDA follows the vortex
+            evolution and merger closely; AOT shows phase and amplitude errors.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        <strong>Current project.</strong> Data assimilation for recovering bottom topography
+        from observations of shallow water flow.
+      </p>
+
+      <h3>Related publications</h3>
+      <ul class="related-pubs">
+      <li>Interpolated Discrepancy Data Assimilation for PDEs with Sparse Observations.<span class="rp-meta">T. Wu, H. Godinez, V. Gyrya, J. M. Hyman. Submitted to <em>SIAM Journal on Scientific Computing</em>, 2025.</span></li>
+      </ul>
+    </section>
+
+    <!-- ── 2. Mosquito-Borne Disease Modeling ── -->
+    <section class="research-area" id="mosquito-borne-disease">
+      <h2>2. Mosquito-Borne Disease Modeling</h2>
+
+      <p>
+        <em>Wolbachia</em> is a bacterium that, once established in a mosquito population,
+        sharply reduces the mosquitoes' ability to transmit dengue, Zika, and chikungunya.
+        Field programs release infected mosquitoes and hope the infection takes hold. Below
+        a tipping point it fades away; above it, it spreads on its own as a wave across the
+        landscape.
+      </p>
+
+      <p>
+        Working with Zhuolin Qu, I build models that couple mosquito reproduction with
+        mosquito movement. They show that the tipping point is not a single percentage but a
+        shape: a dome of infection wide and tall enough that reproduction outruns the
+        dilution caused by mosquitoes flying away. We call it the critical bubble.
+      </p>
+
+      <div class="research-figures">
+        <div>
+          <img src="pics/wolbachia-critical-bubble.png"
+               alt="3D surface of Wolbachia infection fraction forming a dome over a two-dimensional field">
+          <p class="fig-caption">
+            The critical bubble: fraction of infected female mosquitoes over a two-dimensional
+            field, with the release centred at the origin. Releases above this profile establish
+            and spread; releases below it collapse.
+          </p>
+        </div>
+        <div>
+          <img src="pics/net1.png"
+               alt="Bipartite network with two node types used to model heterosexual disease transmission">
+          <p class="fig-caption">
+            A bipartite contact network generated with a prescribed joint-degree distribution,
+            used to simulate heterosexual transmission of sexually transmitted infections.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        Our 2026 paper extends this to a full life-stage model on a two-dimensional landscape
+        with seasonal temperature and rainfall, and uses it to rank release strategies.
+        Knocking down adult mosquitoes before a release lowers the threshold. Releases in dry
+        regions are cheaper but the wave can stall at the boundary of wetter habitat.
+        Releasing just before the wet season reduces the number of mosquitoes needed. A
+        further manuscript replaces diffusion with general dispersal kernels, so that
+        occasional long flights are represented, and proves existence and speed estimates for
+        the resulting travelling waves.
+      </p>
+
+      <p>
+        <strong>Contact networks.</strong> Earlier, at Tulane, I developed an algorithm that
+        generates bipartite networks matching both a prescribed degree distribution and a
+        prescribed joint-degree distribution. Such networks are used to simulate sexually
+        transmitted infections, and generating many of them lets modelers report a range of
+        outbreak predictions instead of an artifact of a single synthetic network.
+      </p>
+
+      <h3>Related publications</h3>
+      <ul class="related-pubs">
+      <li><a href="https://doi.org/10.1098/rsos.251724" target="_blank" rel="noopener">Multistage spatial model for informing release of <em>Wolbachia</em>-infected mosquitoes as disease control.</a><span class="rp-meta">Z. Qu, T. Wu. <em>Royal Society Open Science</em>, 2026. Open access.</span></li>
+      <li><a href="https://doi.org/10.1137/21M1440384" target="_blank" rel="noopener">Modeling spatial waves of Wolbachia invasion for controlling mosquito-borne diseases.</a><span class="rp-meta">Z. Qu, T. Wu, J. M. Hyman. <em>SIAM Journal on Applied Mathematics</em>, 2022.</span></li>
+      <li>Travelling Waves in Wolbachia Spread Dynamics.<span class="rp-meta">Z. Qu, T. Wu, E. Kwessi. Submitted to <em>Journal of Biological Dynamics</em>, 2025.</span></li>
+      <li><a href="https://doi.org/10.1093/comnet/cnx014" target="_blank" rel="noopener">Generating bipartite networks with a prescribed joint degree distribution.</a><span class="rp-meta">A. Azizi, J. Dewar, T. Wu, J. M. Hyman. <em>Journal of Complex Networks</em>, 2017.</span></li>
+      </ul>
+    </section>
+
+    <!-- ── 3. Shallow Water and Atmospheric Flows ── -->
+    <section class="research-area" id="shallow-water">
+      <h2>3. Well-Balanced Schemes for Shallow Water and Atmospheric Flows</h2>
+
+      <p>
+        Water in a river, a lake, or the atmosphere is usually close to a delicate balance
+        between gravity and pressure. The interesting events are small departures from that
+        balance: a flood wave, a rising thermal, a wave running up a beach. Ordinary
+        simulations handle these badly, because their own errors can be larger than the real
+        signal, producing waves that exist only inside the computer.
+      </p>
+
+      <p>
+        I design central-upwind finite-volume schemes that respect the balance exactly, so
+        that any ripple the simulation shows is physical, and that keep the computed water
+        depth non-negative, so that they can run over dry ground, moving riverbeds, and
+        shorelines that wet and dry. Much of this work is joint with Alina Chertock and
+        Alexander Kurganov.
+      </p>
+
+      <div class="research-figures">
+        <div class="fig-half">
+          <img src="pics/path476.png" alt="Experimental setup: laboratory model of rainfall over an urban street grid">
+        </div>
+        <div class="fig-half">
+          <video class="research-video" autoplay muted loop playsinline preload="metadata"
+                 poster="pics/sw-urban-rainfall-poster.jpg"
+                 aria-label="Animation: simulated rainfall runoff through a model city">
+            <source src="pics/sw-urban-rainfall.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="fig-caption fig-caption-wide">
+          Laboratory experiment of Cea, Garrido, and Puertas (2010) modelling rainfall drainage
+          through a model city. The well-balanced, positivity-preserving scheme with a
+          semi-implicit treatment of stiff bottom friction reproduces the measured outflow.
+        </p>
+      </div>
+
+      <p>
+        The same ideas extend to sediment transport, where the riverbed evolves on a much
+        slower clock than the water above it; to layered flows of different density, where a
+        thin intermediate layer enlarges the regime in which the equations stay well posed;
+        and to compressible air under gravity on meshes fitted around obstacles and terrain.
+      </p>
+
+      <div class="research-figures">
+        <div>
+          <img src="pics/sw-star-dune.png"
+               alt="Bottom topography at four times showing a conical dune spreading into a star shape">
+          <p class="fig-caption">
+            A conical sand dune spreading into a star-shaped pattern over 100 hours under a
+            shallow water flow, computed with an operator-splitting scheme that advances the
+            moving bed and the water on separate time steps.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        <strong>Current projects.</strong> Shallow water flows over vertical barriers and
+        through obstacles with openings; multilayer models for bottom topography with
+        singularities; a rolling-wave capturing scheme.
+      </p>
+
+      <h3>Related publications</h3>
+      <ul class="related-pubs">
+      <li><a href="https://doi.org/10.1016/j.amc.2022.127587" target="_blank" rel="noopener">Well-balanced numerical method for atmospheric flow equations with gravity.</a><span class="rp-meta">A. Chertock, A. Kurganov, T. Wu, J. Yan. <em>Applied Mathematics and Computation</em>, 2023.</span></li>
+      <li><a href="https://doi.org/10.1007/s10915-021-01680-z" target="_blank" rel="noopener">Well-balancing via flux globalization: applications to shallow water equations with wet/dry fronts.</a><span class="rp-meta">A. Chertock, A. Kurganov, X. Liu, Y. Liu, T. Wu. <em>Journal of Scientific Computing</em>, 2022.</span></li>
+      <li><a href="https://doi.org/10.1137/19M1258098" target="_blank" rel="noopener">Moving-water equilibria preserving partial relaxation scheme for the Saint-Venant system.</a><span class="rp-meta">X. Liu, X. Chen, S. Jin, A. Kurganov, T. Wu, H. Yu. <em>SIAM Journal on Scientific Computing</em>, 2020.</span></li>
+      <li><a href="https://doi.org/10.4310/CMS.2020.v18.n8.a3" target="_blank" rel="noopener">Operator splitting based central-upwind schemes for shallow water equations with moving bottom topography.</a><span class="rp-meta">A. Chertock, A. Kurganov, T. Wu. <em>Communications in Mathematical Sciences</em>, 2020.</span></li>
+      <li><a href="https://doi.org/10.1007/s10915-019-00947-w" target="_blank" rel="noopener">A new approach for designing moving-water equilibria preserving schemes for the shallow water equations.</a><span class="rp-meta">Y. Cheng, A. Chertock, M. Herty, A. Kurganov, T. Wu. <em>Journal of Scientific Computing</em>, 2019.</span></li>
+      <li><a href="https://doi.org/10.1002/fld.4023" target="_blank" rel="noopener">Well-balanced positivity preserving central-upwind scheme for the shallow water system with friction terms.</a><span class="rp-meta">A. Chertock, S. Cui, A. Kurganov, T. Wu. <em>International Journal for Numerical Methods in Fluids</em>, 2015.</span></li>
+      <li><a href="https://doi.org/10.3846/13926292.2013.869269" target="_blank" rel="noopener">On a three-layer approximation of two-layer shallow water equations.</a><span class="rp-meta">A. Chertock, A. Kurganov, Z. Qu, T. Wu. <em>Mathematical Modelling and Analysis</em>, 2013.</span></li>
+      </ul>
+    </section>
+
+    <!-- ── 4. Adaptive Moving Mesh Methods ── -->
+    <section class="research-area" id="moving-mesh">
+      <h2>4. Adaptive Moving Mesh and High-Resolution Methods</h2>
+
+      <p>
+        Many flows are almost entirely about what happens in a few small, fast-changing
+        places: a shock, a dam-break front, a cloud of granular material clumping together,
+        a colony of cells piling up. A simulation that spreads its grid evenly spends nearly
+        all its effort on the quiet regions and still resolves the action poorly.
+      </p>
+
+      <p>
+        My adaptive moving mesh (AMM) schemes let the grid move by itself: cells drift toward
+        sharp features as the simulation runs. The difficult part is keeping this honest. The
+        mesh must stay well shaped, mass and water volume must be conserved exactly, water
+        depth must never go negative, and a lake at rest must stay at rest. My papers develop
+        the techniques that guarantee these properties for gas dynamics, granular flow,
+        chemotaxis models in biology, and shallow water.
+      </p>
+
+      <div class="research-figures">
+        <div>
+          <img src="pics/amm-granular-clusters.png"
+               alt="Granular gas density as a 3D surface, as a top view, and the adaptive mesh concentrating along the cluster boundary">
+          <p class="fig-caption">
+            Freely cooling granular gas at <em>t</em> = 25: density as a surface (left) and from
+            above (middle), and the adaptive mesh (right), whose cells crowd along the sharp
+            boundary of the growing cluster.
+          </p>
+        </div>
+      </div>
+
+      <div class="research-figures">
+        <div>
+          <img src="pics/AMMsw2.png"
+               alt="AMM central-upwind scheme for shallow water equations: solution and adapted mesh">
+          <p class="fig-caption">
+            <strong>Shallow water.</strong> Water surface (left) and adapted mesh (right) for the
+            Saint-Venant system. The scheme is well-balanced and positivity preserving, and the
+            mesh sharpens the discontinuities.
           </p>
         </div>
         <div>
           <img src="pics/AMMchm.png"
-               alt="AMM upwind scheme for two-species chemotaxis model">
+               alt="AMM upwind scheme for two-species chemotaxis model: two cell densities, chemoattractant, and adapted mesh">
           <p class="fig-caption">
-            <strong>Two-species chemotaxis system.</strong> A 2-D AMM upwind scheme
-            for the Patlak–Keller–Segel chemotaxis system with two non-competing
-            species of different chemotactic sensitivity. The solution develops
-            multi-spiky structures that are resolved with high resolution by the
-            AMM scheme.
+            <strong>Two-species chemotaxis.</strong> Two cell populations with different
+            chemotactic sensitivity develop spiky aggregates, resolved by a mesh that gathers
+            around each spike.
           </p>
         </div>
       </div>
 
       <p>
-        The AMM framework has been applied to Saint-Venant shallow water systems,
-        two-species chemotaxis models, and general hyperbolic systems of
-        conservation laws. The adaptive redistribution of mesh points
-        concentrates resolution near solution features, significantly reducing
-        computational cost compared to fixed uniform grids.
-      </p>
-    </section>
-
-    <!-- ── 3. Shallow Water Equations ── -->
-    <section class="research-area">
-      <h2>3. Shallow Water Equations</h2>
-
-      <p>
-        Shallow water models are widely used as a mathematical framework to study
-        water flows in rivers and coastal areas as well as to investigate a variety
-        of phenomena in atmospheric sciences and oceanography. Solving the shallow
-        water equations numerically is a challenging task for several reasons,
-        including the preservation of physically relevant steady-state solutions
-        (well-balancing) and the positivity preservation of water depth.
+        <strong>Related high-resolution methods.</strong> I have also developed a genuinely
+        two-dimensional fully discrete central-upwind scheme with less numerical dissipation
+        than its semi-discrete counterpart, an updated-Lagrangian discontinuous Galerkin
+        method for gas dynamics with colleagues at Los Alamos, and semi-implicit Runge–Kutta
+        methods that preserve steady states exactly for equations with stiff damping, the
+        time-stepping counterpart of well-balancing.
       </p>
 
-      <p>
-        <strong>Shallow Water Equations with Friction.</strong>
-        Beyond the standard numerical difficulties, the bottom friction term
-        becomes extremely stiff when water depth is very small. I introduced
-        a semi-implicit-explicit version of the central-upwind scheme that is
-        second-order accurate, well-balanced, and positivity preserving. The stiff
-        friction term is treated semi-implicitly, so no extra time-step restriction
-        is imposed.
-      </p>
-
-      <div>
-	<div style="display: flex; gap: 1rem; align-items: center;">
-  	  <img src="pics/path476.png" alt="Experimental setup: urban rainfall simulation"
-       		style="width: 50%;">
-  	  <img src="pics/sw1.gif" alt="Shallow water simulation: urban rainfall experiment"
-       		style="width: 50%;">
-	</div>
-          <p class="fig-caption">
-            Laboratory experiment of Cea, Garrido, and Puertas (2010) modelling
-            rainfall in an urban area. The designed scheme achieves remarkable
-            agreement with experimental results.
-          </p>
-      </div>
-
-      <p>
-        Additional contributions in this area include well-balanced central-upwind
-        schemes for shallow water equations with wet/dry fronts via flux
-        globalization, operator-splitting schemes for moving bottom topography,
-        moving-water equilibria preserving schemes, and a three-layer approximation
-        of two-layer shallow water systems.
-      </p>
-    </section>
-
-    <!-- ── 4. Network-Based Epidemiology ── -->
-    <section class="research-area">
-      <h2>4. Network-Based Epidemiology</h2>
-
-      <div>
-        <div style="align-items: center;">
-          <img src="pics/net1.png"
-               alt="Bipartite network for sexually transmitted disease modeling" style="width: 50%; display: block; margin: 0 auto;">
-        </div>
-          <p class="fig-caption">
-            Example bipartite network used to model heterosexual transmission
-            of sexually transmitted infections.
-          </p>
-      </div>
-
-      <p>
-        Many natural and social dynamics, including the spread of infectious
-        diseases, can be described using networks. In such models, each node
-        represents an individual and each edge represents a possible transmission
-        route. For sexually transmitted diseases such as Chlamydia, which are
-        transmitted only through heterosexual partnerships, bipartite network
-        models are particularly appropriate.
-      </p>
-
-      <p>
-        When generating synthetic networks for disease modeling, it is essential
-        to preserve the relevant structure of real-world contact networks,
-        including the degree distribution and the joint-degree distribution.
-        I designed a new algorithm to construct bipartite networks that exactly
-        match both a prescribed degree distribution and a prescribed joint-degree
-        distribution; the resulting networks have been used to model transmissions
-        of sexually transmitted diseases.
-      </p>
-
-      <p>
-        More recent work extends to <strong>spatial models for Wolbachia invasion
-        dynamics</strong>. Wolbachia is a bacterial endosymbiont that, when
-        introduced into mosquito populations, can suppress the transmission of
-        dengue, Zika, and chikungunya. I have developed reaction-diffusion PDE
-        models and multistage spatial models that describe Wolbachia spread and
-        inform optimal release strategies for mosquito-borne disease control
-        (see our <a href="https://doi.org/10.1098/rsos.251724" target="_blank" rel="noopener">2026
-        paper in <em>Royal Society Open Science</em></a>, open access).
-      </p>
+      <h3>Related publications</h3>
+      <ul class="related-pubs">
+      <li><a href="https://doi.org/10.1051/m2an/2022041" target="_blank" rel="noopener">Well-balanced positivity preserving adaptive moving mesh central-upwind schemes for the Saint-Venant system.</a><span class="rp-meta">A. Kurganov, Z. Qu, T. Wu. <em>ESAIM: Mathematical Modelling and Numerical Analysis</em>, 2022.</span></li>
+      <li><a href="https://doi.org/10.1007/s42967-020-00082-6" target="_blank" rel="noopener">Adaptive moving mesh central-upwind schemes for hyperbolic systems of PDEs: applications to compressible Euler equations and granular hydrodynamics.</a><span class="rp-meta">A. Kurganov, Z. Qu, O. S. Rozanova, T. Wu. <em>Communications on Applied Mathematics and Computation</em>, 2021.</span></li>
+      <li><a href="https://doi.org/10.1016/j.camwa.2019.01.021" target="_blank" rel="noopener">Adaptive moving mesh upwind scheme for the two-species chemotaxis model.</a><span class="rp-meta">A. Chertock, A. Kurganov, M. Ricchiuto, T. Wu. <em>Computers &amp; Mathematics with Applications</em>, 2019.</span></li>
+      <li><a href="https://doi.org/10.1016/j.camwa.2018.03.040" target="_blank" rel="noopener">An updated Lagrangian discontinuous Galerkin hydrodynamic method for gas dynamics.</a><span class="rp-meta">T. Wu, M. J. Shashkov, N. Morgan, H. Luo, D. Kuzmin. <em>Computers &amp; Mathematics with Applications</em>, 2019.</span></li>
+      <li><a href="https://doi.org/10.1137/15M1038670" target="_blank" rel="noopener">Second-order fully discrete central-upwind scheme for two-dimensional hyperbolic systems of conservation laws.</a><span class="rp-meta">A. Kurganov, M. Prugger, T. Wu. <em>SIAM Journal on Scientific Computing</em>, 2017.</span></li>
+      <li><a href="https://doi.org/10.1137/151005798" target="_blank" rel="noopener">Steady state and sign preserving semi-implicit Runge–Kutta methods for ODEs with stiff damping term.</a><span class="rp-meta">A. Chertock, S. Cui, A. Kurganov, T. Wu. <em>SIAM Journal on Numerical Analysis</em>, 2015.</span></li>
+      </ul>
     </section>
 
   </main>

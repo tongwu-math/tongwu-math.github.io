@@ -324,6 +324,123 @@ nav {
 
 .tool-desc { font-size: 0.9rem; margin-top: 0.3rem; }
 
+/* ── Research: lead, area cards, related pubs, video ── */
+.lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin-bottom: 1.4rem;
+}
+
+.area-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 2.6rem;
+}
+
+.area-card {
+  display: block;
+  padding: 0.8rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: #fafcff;
+  border-radius: 0 3px 3px 0;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s;
+}
+.area-card:hover { background: #f0f5ff; text-decoration: none; }
+
+.area-card-title {
+  display: block;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.2rem;
+}
+
+.area-card-desc {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.research-area h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 1.4rem 0 0.5rem;
+}
+
+.related-pubs {
+  list-style: none;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.related-pubs li {
+  padding: 0.35rem 0;
+  border-bottom: 1px dotted var(--border);
+}
+.related-pubs li:last-child { border-bottom: none; }
+
+.rp-meta {
+  display: block;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.research-video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.12);
+}
+
+.research-figures > div { flex: 1 1 320px; min-width: 0; }
+.research-figures .fig-half { flex: 1 1 45%; }
+.research-figures .fig-caption-wide { flex-basis: 100%; }
+
+.research-area { scroll-margin-top: calc(var(--nav-h) + 1rem); }
+
+/* ── Teaching: course table ── */
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+  margin-bottom: 1rem;
+}
+
+.course-table th {
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  border-bottom: 2px solid var(--border);
+  padding: 0.4rem 0.6rem 0.4rem 0;
+}
+
+.course-table td {
+  padding: 0.5rem 0.6rem 0.5rem 0;
+  border-bottom: 1px dotted var(--border);
+  vertical-align: top;
+}
+.course-table tr:last-child td { border-bottom: none; }
+
+.course-table td:first-child { font-weight: 600; white-space: nowrap; }
+
+.course-code {
+  color: var(--muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.course-note {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
 /* ── Teaching ── */
 .teaching-year {
   margin-bottom: 2rem;
@@ -444,6 +561,9 @@ footer a:hover { color: #fff; text-decoration: none; }
 
   .profile-links { justify-content: center; }
   .tool-entry { flex-direction: column; }
+  .area-cards { grid-template-columns: 1fr; }
+  .course-table { font-size: 0.86rem; }
+  .course-table td:first-child { white-space: normal; }
   .tool-thumb { width: 100%; max-width: 320px; }
 
   .news-date { width: 90px; font-size: 0.82rem; }
